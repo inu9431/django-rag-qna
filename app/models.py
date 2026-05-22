@@ -9,7 +9,7 @@ class QADocument(TimeStampMixin):
     __tablename__ = "qa_document"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    question: Mapped[int] = mapped_column(Text)
-    answer: Mapped[int] = mapped_column(Text)
-    embedding: Mapped[int] = mapped_column(Vector(1536))
+    question: Mapped[str] = mapped_column(Text)
+    answer: Mapped[str] = mapped_column(Text)
+    embedding: Mapped[list] = mapped_column(Vector(1536))
     
