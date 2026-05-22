@@ -10,8 +10,10 @@ engine = create_async_engine(settings.database_url)
 
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
+
 class Base(DeclarativeBase):
     pass
+
 
 class TimeStampMixin(Base):
     __abstract__ = True
@@ -20,6 +22,7 @@ class TimeStampMixin(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now(), onupdate=func.now()
     )
+
 
 async def get_db():
     async with AsyncSessionLocal() as session:
