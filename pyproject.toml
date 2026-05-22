@@ -10,7 +10,10 @@ dependencies = [
     "pydantic-settings>=2.1.0",
     "python-dotenv>=1.0.0",
     "psycopg2-binary>=2.9",
-    "sqlalchemy>=2.0",
+    "sqlalchemy[asyncio]>=2.0",
+    "openai>=2.37.0",
+    "pgvector>=0.4.2",
+    "asyncpg>=0.31.0",
 ]
 
 [project.optional-dependencies]

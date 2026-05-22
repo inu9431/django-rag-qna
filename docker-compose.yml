@@ -1,16 +1,16 @@
 services:
   db:
-    image: postgres:16-alpine
-    container_name: app_db_dev
+    image: pgvector/pgvector:pg16
+    container_name: app_qna_db
     environment:
-      POSTGRES_DB: ${DB_NAME:-dev_db}
+      POSTGRES_DB: ${DB_NAME:-ragdb}
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5455:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
       interval: 10s
@@ -27,11 +27,12 @@ services:
     build:
       context: .
       target: development
-    container_name: app_web_dev
+    container_name: app_web_qna
     volumes:
       - .:/app
+      - /app/.venv
     ports:
-      - "8002:8000"
+      - "8012:8000"
     env_file:
       - .env
     environment:
